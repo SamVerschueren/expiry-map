@@ -9,6 +9,7 @@
 		"email": "sam.verschueren@gmail.com",
 		"url": "github.com/SamVerschueren"
 	},
+	"main": "dist/index.js",
 	"engines": {
 		"node": ">=6"
 	},
