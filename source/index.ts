@@ -5,7 +5,7 @@ interface Entry<V> {
 
 export default class ExpiryMap<K = any, V = any> implements Map<K, V> {
 	private readonly data: Map<K, Entry<V>>;
-	public readonly [Symbol.toStringTag] = 'Map';
+	public readonly [Symbol.toStringTag]: 'Map' = 'Map';
 
 	constructor(maxAge: number);
 	constructor(maxAge: number, entries: ReadonlyArray<[K, V]> | null | undefined);
