@@ -44,7 +44,7 @@ test('.clear', t => {
 	t.false(map.has('unicorn'));
 });
 
-test('.delete', t => {
+test('.delete', async t => {
 	const map = new ExpiryMap<string, string>(1000);
 	map.set('foo', 'bar');
 	map.set('unicorn', 'rainbow');
@@ -52,10 +52,14 @@ test('.delete', t => {
 	t.true(map.has('foo'));
 	t.true(map.has('unicorn'));
 
-	map.delete('unicorn');
+	t.true(map.delete('unicorn'));
 
 	t.true(map.has('foo'));
 	t.false(map.has('unicorn'));
+
+	await delay(1100);
+
+	t.false(map.delete('foo'));
 });
 
 test('.has', async t => {

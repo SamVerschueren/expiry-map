@@ -29,7 +29,13 @@ export default class ExpiryMap<K = any, V = any> implements Map<K, V> {
 	}
 
 	delete(key: K) {
-		return this.data.delete(key);
+		const hasItem = this.has(key);
+
+		if (hasItem) {
+			this.data.delete(key);
+		}
+
+		return hasItem;
 	}
 
 	has(key: K) {
