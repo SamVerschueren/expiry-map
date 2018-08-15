@@ -59,6 +59,11 @@ An `Array` or other `iterable` object whose elements are key-value pairs.
 Any of the [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) methods.
 
 
+## Related
+
+- [expiry-set](https://github.com/SamVerschueren/expiry-set) - A `Set` implementation with expirable keys
+
+
 ## License
 
 MIT © [Sam Verschueren](https://github.com/SamVerschueren)
