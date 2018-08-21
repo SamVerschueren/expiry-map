@@ -238,3 +238,39 @@ test('iterator', async t => {
 		t.fail();
 	}
 });
+
+test('auto cleanup', async t => {
+	const map = new ExpiryMap<string, string>(1000);
+	map.set('foo', 'bar');
+
+	await delay(400);
+	map.set('unicorn', 'rainbow');
+	await delay(100);
+	map.set('hello', 'world');
+
+	t.true(map.has('foo'));
+	t.true(map.has('unicorn'));
+	t.true(map.has('hello'));
+	t.is(map.size, 3);
+
+	await delay(500);
+
+	t.false(map.has('foo'));
+	t.true(map.has('unicorn'));
+	t.true(map.has('hello'));
+	t.is(map.size, 2);
+
+	await delay(400);
+
+	t.false(map.has('foo'));
+	t.false(map.has('unicorn'));
+	t.true(map.has('hello'));
+	t.is(map.size, 1);
+
+	await delay(100);
+
+	t.false(map.has('foo'));
+	t.false(map.has('unicorn'));
+	t.false(map.has('hello'));
+	t.is(map.size, 0);
+});

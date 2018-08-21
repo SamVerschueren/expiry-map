@@ -34,6 +34,9 @@
 		"expiring",
 		"expiry"
 	],
+	"dependencies": {
+		"map-age-cleaner": "^0.1.0"
+	},
 	"devDependencies": {
 		"@types/delay": "^2.0.1",
 		"@types/node": "^10.5.8",

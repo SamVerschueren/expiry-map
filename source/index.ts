@@ -1,5 +1,7 @@
+import mapAgeCleaner from 'map-age-cleaner';
+
 interface Entry<V> {
-	timestamp: number;
+	maxAge: number;
 	data: V;
 }
 
@@ -13,6 +15,9 @@ export default class ExpiryMap<K = any, V = any> implements Map<K, V> {
 	constructor(private readonly maxAge: number, data?: ReadonlyArray<[K, V]> | Iterable<[K, V]> | null | undefined) {
 		this.data = new Map();
 
+		// Bootstrap the cleanup process which frees up memory when an item expires
+		mapAgeCleaner(this.data);
+
 		if (data) {										// tslint:disable-line:early-exit
 			for (const [key, value] of data) {
 				this.set(key, value);
@@ -21,7 +26,7 @@ export default class ExpiryMap<K = any, V = any> implements Map<K, V> {
 	}
 
 	get size() {
-		return [...this.entries()].length;
+		return this.data.size;
 	}
 
 	clear() {
@@ -29,25 +34,17 @@ export default class ExpiryMap<K = any, V = any> implements Map<K, V> {
 	}
 
 	delete(key: K) {
-		const hasItem = this.has(key);
-
-		if (hasItem) {
-			this.data.delete(key);
-		}
-
-		return hasItem;
+		return this.data.delete(key);
 	}
 
 	has(key: K) {
-		const value = this.data.get(key);
-
-		return Boolean(value && !this.isExpired([key, value]));
+		return this.data.has(key);
 	}
 
 	get(key: K) {
 		const value = this.data.get(key);
 
-		if (value && !this.isExpired([key, value])) {
+		if (value) {
 			return value.data;
 		}
 
@@ -56,7 +53,7 @@ export default class ExpiryMap<K = any, V = any> implements Map<K, V> {
 
 	set(key: K, value: V) {
 		this.data.set(key, {
-			timestamp: Date.now(),
+			maxAge: Date.now() + this.maxAge,
 			data: value
 		});
 
@@ -68,7 +65,7 @@ export default class ExpiryMap<K = any, V = any> implements Map<K, V> {
 	}
 
 	keys() {
-		return this.createIterator(item => item[0]);
+		return this.data.keys();
 	}
 
 	entries() {
@@ -85,21 +82,9 @@ export default class ExpiryMap<K = any, V = any> implements Map<K, V> {
 		return this.entries();
 	}
 
-	private isExpired([key, value]: [K, Entry<V>]) {
-		const isExpired = Date.now() - value.timestamp > this.maxAge;
-
-		if (isExpired) {
-			this.data.delete(key);
-		}
-
-		return isExpired;
-	}
-
 	private *createIterator<T>(projection: (item: [K, Entry<V>]) => T) {
 		for (const item of this.data.entries()) {
-			if (!this.isExpired(item)) {
-				yield projection(item);
-			}
+			yield projection(item);
 		}
 	}
 }
