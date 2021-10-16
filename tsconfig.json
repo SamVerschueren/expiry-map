@@ -7,7 +7,6 @@
 		],
 		"module": "commonjs",
 		"moduleResolution": "node",
-		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"declaration": true,
 		"pretty": true,

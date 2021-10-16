@@ -17,7 +17,7 @@ $ npm install expiry-map
 ## Usage
 
 ```js
-import ExpiryMap from 'expiry-map';
+import ExpiryMap = require('expiry-map');
 
 const map = new ExpiryMap(1000, [
 	['unicorn', '🦄']

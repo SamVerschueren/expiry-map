@@ -1,11 +1,11 @@
-import mapAgeCleaner from 'map-age-cleaner';
+import mapAgeCleaner = require('map-age-cleaner');
 
 interface Entry<V> {
 	maxAge: number;
 	data: V;
 }
 
-export default class ExpiryMap<K = any, V = any> implements Map<K, V> {
+class ExpiryMap<K = any, V = any> implements Map<K, V> {
 	private readonly data: Map<K, Entry<V>>;
 	public readonly [Symbol.toStringTag]: 'Map' = 'Map';
 
@@ -89,6 +89,4 @@ export default class ExpiryMap<K = any, V = any> implements Map<K, V> {
 	}
 }
 
-// Add support for CJS
-module.exports = ExpiryMap;
-module.exports.default = ExpiryMap;
+export = ExpiryMap;
