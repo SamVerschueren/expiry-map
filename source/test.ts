@@ -1,7 +1,7 @@
 /* tslint:disable:await-promise */
 import test from 'ava';
 import delay from 'delay';
-import ExpiryMap from '.';
+import ExpiryMap = require('.');
 
 test('constructor', t => {
 	const map = new ExpiryMap<string, string>(1000, [
