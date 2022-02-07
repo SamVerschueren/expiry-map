@@ -11,7 +11,7 @@
 	},
 	"main": "dist/index.js",
 	"engines": {
-		"node": ">=7.6"
+		"node": ">=12"
 	},
 	"scripts": {
 		"prepublishOnly": "npm run build",
