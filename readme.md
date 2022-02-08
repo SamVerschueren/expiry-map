@@ -1,6 +1,6 @@
 # expiry-map
 
-[![Build Status](https://travis-ci.org/SamVerschueren/expiry-map.svg?branch=master)](https://travis-ci.org/SamVerschueren/expiry-map) [![Coverage Status](https://codecov.io/gh/SamVerschueren/expiry-map/branch/master/graph/badge.svg)](https://codecov.io/gh/SamVerschueren/expiry-map)
+![CI](https://github.com/SamVerschueren/expiry-map/workflows/CI/badge.svg) [![codedov](https://codecov.io/gh/SamVerschueren/expiry-map/branch/master/graph/badge.svg)](https://codecov.io/gh/SamVerschueren/expiry-map)
 
 > A [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) implementation with expirable items
 
