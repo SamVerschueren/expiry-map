@@ -11,7 +11,7 @@
 	},
 	"main": "dist/index.js",
 	"engines": {
-		"node": ">=6"
+		"node": ">=8"
 	},
 	"scripts": {
 		"prepublishOnly": "npm run build",
@@ -35,7 +35,7 @@
 		"expiry"
 	],
 	"dependencies": {
-		"map-age-cleaner": "^0.1.0"
+		"map-age-cleaner": "^0.2.0"
 	},
 	"devDependencies": {
 		"@types/delay": "^2.0.1",
